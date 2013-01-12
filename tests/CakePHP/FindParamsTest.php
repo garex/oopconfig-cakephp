@@ -7,6 +7,15 @@
  */
 class FindParamsTest extends PHPUnit_Framework_TestCase {
 
+	/**
+	 * @var OopConfig_CakePHP_FindParams
+	 */
+	public $findParams;
+
+	public function setUp() {
+		$this->findParams = new OopConfig_CakePHP_FindParams();
+	}
+
 	public function testCanBeInstantiated() {
 		new OopConfig_CakePHP_FindParams();
 	}
@@ -19,8 +28,7 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			'group'      => array('Model.field'),
 		);
 
-		$findParams = new OopConfig_CakePHP_FindParams();
-		$actual     = $findParams
+		$actual     = $this->findParams
 			->conditions->is('Model.field', 123)->up()
 			->fields->add('Model.field1')->add('DISTINCT Model.field2')->up()
 			->order->add('Model.created')->add('Model.field3 DESC')->up()
@@ -36,8 +44,7 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			'recursive'  => 1,
 		);
 
-		$findParams = new OopConfig_CakePHP_FindParams();
-		$actual     = $findParams
+		$actual     = $this->findParams
 			->recursive(1)
 			->get()
 		;
@@ -53,8 +60,7 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			'callbacks'  => true,
 		);
 
-		$findParams = new OopConfig_CakePHP_FindParams();
-		$actual     = $findParams
+		$actual     = $this->findParams
 			->limit(100)
 			->page(1)
 			->offset(10)
@@ -72,12 +78,11 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			'group'      => array('Model.field'),
 		);
 
-		$findParams = new OopConfig_CakePHP_FindParams();
-		$actual     = $findParams
-		->fields('Model.field1', 'DISTINCT Model.field2')
-		->order('Model.created', 'Model.field3 DESC')
-		->group('Model.field')
-		->get()
+		$actual     = $this->findParams
+			->fields('Model.field1', 'DISTINCT Model.field2')
+			->order('Model.created', 'Model.field3 DESC')
+			->group('Model.field')
+			->get()
 		;
 
 		$this->assertEquals($expected, $actual);
@@ -97,8 +102,7 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$findParams = new OopConfig_CakePHP_FindParams();
-		$actual     = $findParams
+		$actual     = $this->findParams
 			->condition('Model.field1', 1)
 			->conditionNot('Model.field2', 2)
 			->conditionMore('Model.field3', 3)
@@ -107,6 +111,41 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			->conditionRaw('Model.field6 & 6 = 6')
 			->conditionLike('Model.field7', '%7%')
 			->conditionNotLike('Model.field8', '%8%')
+			->get()
+		;
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testSetComplexArrayValues() {
+		$expected = array(
+			'conditions' => array(
+				'Model.field' => 123,
+				'Model.field5 BETWEEN ? AND ?' => array(5, 5),
+				'Model.field8 NOT LIKE' => '%8%',
+			),
+			'recursive'  => 1,
+			'fields'     => array('Model.field1', 'DISTINCT Model.field2'),
+			'order'      => array('Model.created', 'Model.field3 DESC'),
+			'group'      => array('Model.field'),
+			'limit'      => 100,
+			'page'       => 1,
+			'offset'     => 10,
+			'callbacks'  => true,
+		);
+
+		$actual     = $this->findParams
+			->conditions
+				->is('Model.field', 123)
+				->between('Model.field5', 5, 5)
+				->notLike('Model.field8', '%8%')
+				->up()
+			->recursive(1)
+			->fields('Model.field1', 'DISTINCT Model.field2')
+			->order('Model.created', 'Model.field3 DESC')
+			->group('Model.field')
+			->limit(100)->page(1)->offset(10)
+			->callbacks(true)
 			->get()
 		;
 
