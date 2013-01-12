@@ -14,14 +14,11 @@ class OopConfig_CakePHP_FindParams_Order extends OopConfig_Modules_Abstract_Part
 	}
 
 	/**
-	 * Order result by fields. Can take more than one argument
+	 * Order result by field
 	 * @param string $field
 	 * @return OopConfig_CakePHP_FindParams_Order
 	 */
-	public function add() {
-		foreach (func_get_args() as $value) {
-			$this->_add($value);
-		}
-		return $this;
+	public function add($field) {
+		return $this->_add($field);
 	}
 }

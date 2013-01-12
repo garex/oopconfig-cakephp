@@ -65,4 +65,21 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testWriteLessCodeForArrayValues() {
+		$expected = array(
+			'fields'     => array('Model.field1', 'DISTINCT Model.field2'),
+			'order'      => array('Model.created', 'Model.field3 DESC'),
+			'group'      => array('Model.field'),
+		);
+
+		$findParams = new OopConfig_CakePHP_FindParams();
+		$actual     = $findParams
+			->fields('Model.field1', 'DISTINCT Model.field2')
+			->order('Model.created', 'Model.field3 DESC')
+			->group('Model.field')
+			->get()
+		;
+
+		$this->assertEquals($expected, $actual);
+	}
 }

@@ -14,19 +14,19 @@ class OopConfig_CakePHP_FindParams extends OopConfig_Modules_Abstract {
 	public $conditions;
 
 	/**
-	 * Fields that will be returned in resultset: select part of the query.
+	 * A list of fields to be retrieved when data is fetched. Returns all fields by default.
 	 * @var OopConfig_CakePHP_FindParams_Fields
 	 */
 	public $fields;
 
 	/**
-	 * Order columns by which resultset will be ordered: order by part of the query.
+	 * An SQL fragment that defines the sorting order for the returned rows.
 	 * @var OopConfig_CakePHP_FindParams_Order
 	 */
 	public $order;
 
 	/**
-	 * Grouping columns by which resultset will be grouped: group by part of the query.
+	 * An SQL fragment that defines the grouping for the returned rows.
 	 * @var OopConfig_CakePHP_FindParams_Group
 	 */
 	public $group;
@@ -82,6 +82,45 @@ class OopConfig_CakePHP_FindParams extends OopConfig_Modules_Abstract {
 	 */
 	public function callbacks($value) {
 		return $this->_setAssoc(__FUNCTION__, $value);
+	}
+
+	/**
+	 * A list of fields to be retrieved when data is fetched. Returns all fields by default.
+	 * @param string $field
+	 * @param string $field,... OPTIONAL fields
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function fields($field) {
+		foreach (func_get_args() as $field) {
+			$this->fields->add($field);
+		}
+		return $this;
+	}
+
+	/**
+	 * An SQL fragment that defines the sorting order for the returned rows.
+	 * @param string $field
+	 * @param string $field,... OPTIONAL fields
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function order($field) {
+		foreach (func_get_args() as $field) {
+			$this->order->add($field);
+		}
+		return $this;
+	}
+
+	/**
+	 * An SQL fragment that defines the grouping for the returned rows.
+	 * @param string $field
+	 * @param string $field,... OPTIONAL fields
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function group($field) {
+		foreach (func_get_args() as $field) {
+			$this->group->add($field);
+		}
+		return $this;
 	}
 
 }
