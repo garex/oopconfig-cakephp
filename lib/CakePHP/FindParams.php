@@ -38,4 +38,50 @@ class OopConfig_CakePHP_FindParams extends OopConfig_Modules_Abstract {
 		$this->group      = new OopConfig_CakePHP_FindParams_Group($this);
 	}
 
+	/**
+	 * Number of associations to recurse through during find calls. Fetches only the first level by default.
+	 * @param integer $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function recursive($value) {
+		return $this->_setAssoc(__FUNCTION__, $value);
+	}
+
+	/**
+	 * The maximum number of rows you want returned.
+	 * @param integer $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function limit($value) {
+		return $this->_setAssoc(__FUNCTION__, $value);
+	}
+
+	/**
+	 * Which page of results to fetch. Used in pair with "limit".
+	 * @see OopConfig_CakePHP_FindParams::limit
+	 * @param integer $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function page($value) {
+		return $this->_setAssoc(__FUNCTION__, $value);
+	}
+
+	/**
+	 * The number of rows to skip over (given the current conditions and order) before fetching.
+	 * @param integer $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function offset($value) {
+		return $this->_setAssoc(__FUNCTION__, $value);
+	}
+
+	/**
+	 * Run callbacks (fire events)?
+	 * @param boolean $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function callbacks($value) {
+		return $this->_setAssoc(__FUNCTION__, $value);
+	}
+
 }
