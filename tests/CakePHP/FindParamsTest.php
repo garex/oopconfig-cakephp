@@ -74,10 +74,10 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 
 		$findParams = new OopConfig_CakePHP_FindParams();
 		$actual     = $findParams
-		->fields('Model.field1', 'DISTINCT Model.field2')
-		->order('Model.created', 'Model.field3 DESC')
-		->group('Model.field')
-		->get()
+			->fields('Model.field1', 'DISTINCT Model.field2')
+			->order('Model.created', 'Model.field3 DESC')
+			->group('Model.field')
+			->get()
 		;
 
 		$this->assertEquals($expected, $actual);
@@ -107,6 +107,42 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			->conditionRaw('Model.field6 & 6 = 6')
 			->conditionLike('Model.field7', '%7%')
 			->conditionNotLike('Model.field8', '%8%')
+			->get()
+		;
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testSetComplexArrayValues() {
+		$expected = array(
+			'conditions' => array(
+				'Model.field' => 123,
+				'Model.field5 BETWEEN ? AND ?' => array(5, 5),
+				'Model.field8 NOT LIKE' => '%8%',
+			),
+			'recursive'  => 1,
+			'fields'     => array('Model.field1', 'DISTINCT Model.field2'),
+			'order'      => array('Model.created', 'Model.field3 DESC'),
+			'group'      => array('Model.field'),
+			'limit'      => 100,
+			'page'       => 1,
+			'offset'     => 10,
+			'callbacks'  => true,
+		);
+
+		$findParams = new OopConfig_CakePHP_FindParams();
+		$actual     = $findParams
+			->conditions
+				->is('Model.field', 123)
+				->between('Model.field5', 5, 5)
+				->notLike('Model.field8', '%8%')
+				->up()
+			->recursive(1)
+			->fields('Model.field1', 'DISTINCT Model.field2')
+			->order('Model.created', 'Model.field3 DESC')
+			->group('Model.field')
+			->limit(100)->page(1)->offset(10)
+			->callbacks(true)
 			->get()
 		;
 
