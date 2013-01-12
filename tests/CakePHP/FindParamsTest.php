@@ -45,4 +45,24 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testSetFlatValueLikeLimitPageOffsetAndCallbacks() {
+		$expected = array(
+			'limit'      => 100,
+			'page'       => 1,
+			'offset'     => 10,
+			'callbacks'  => true,
+		);
+
+		$findParams = new OopConfig_CakePHP_FindParams();
+		$actual     = $findParams
+			->limit(100)
+			->page(1)
+			->offset(10)
+			->callbacks(true)
+			->get()
+		;
+
+		$this->assertEquals($expected, $actual);
+	}
+
 }
