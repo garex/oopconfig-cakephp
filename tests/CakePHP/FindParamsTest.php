@@ -21,7 +21,7 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 
 		$findParams = new OopConfig_CakePHP_FindParams();
 		$actual     = $findParams
-			->conditions->fieldIs('Model.field', 123)->up()
+			->conditions->is('Model.field', 123)->up()
 			->fields->add('Model.field1')->add('DISTINCT Model.field2')->up()
 			->order->add('Model.created')->add('Model.field3 DESC')->up()
 			->group->add('Model.field')->up()
@@ -74,9 +74,35 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 
 		$findParams = new OopConfig_CakePHP_FindParams();
 		$actual     = $findParams
-			->fields('Model.field1', 'DISTINCT Model.field2')
-			->order('Model.created', 'Model.field3 DESC')
-			->group('Model.field')
+		->fields('Model.field1', 'DISTINCT Model.field2')
+		->order('Model.created', 'Model.field3 DESC')
+		->group('Model.field')
+		->get()
+		;
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testShortcutForConditions() {
+		$expected = array(
+			'conditions' => array(
+				'Model.field1'    => 1,
+				'Model.field2 !=' => 2,
+				'Model.field3 >'  => 3,
+				'Model.field4 <'  => 4,
+				'Model.field5 BETWEEN ? AND ?' => array(5, 5),
+				'Model.field6 & 6 = 6',
+			),
+		);
+
+		$findParams = new OopConfig_CakePHP_FindParams();
+		$actual     = $findParams
+			->condition('Model.field1', 1)
+			->conditionNot('Model.field2', 2)
+			->conditionMore('Model.field3', 3)
+			->conditionLess('Model.field4', 4)
+			->conditionBetween('Model.field5', 5, 5)
+			->conditionRaw('Model.field6 & 6 = 6')
 			->get()
 		;
 

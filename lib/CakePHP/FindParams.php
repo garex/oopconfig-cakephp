@@ -123,4 +123,64 @@ class OopConfig_CakePHP_FindParams extends OopConfig_Modules_Abstract {
 		return $this;
 	}
 
+	/**
+	 * Checks if field has provided value
+	 * @param string $field
+	 * @param mixed $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function condition($field, $value) {
+		return $this->conditions->is($field, $value)->up;
+	}
+
+	/**
+	 * Checks if field does not has provided value
+	 * @param string $field
+	 * @param mixed $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function conditionNot($field, $value) {
+		return $this->conditions->not($field, $value)->up;
+	}
+
+	/**
+	 * Checks if field has value more than provided
+	 * @param string $field
+	 * @param mixed $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function conditionMore($field, $value) {
+		return $this->conditions->more($field, $value)->up;
+	}
+
+	/**
+	 * Checks if field has value less than provided
+	 * @param string $field
+	 * @param mixed $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function conditionLess($field, $value) {
+		return $this->conditions->less($field, $value)->up;
+	}
+
+	/**
+	 * Checks if field has value between provided range
+	 * @param string $field
+	 * @param mixed $start
+	 * @param mixed $finish
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function conditionBetween($field, $start, $finish) {
+		return $this->conditions->between($field, $start, $finish)->up;
+	}
+
+	/**
+	 * Adds raw condition
+	 * @param string $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function conditionRaw($value) {
+		return $this->conditions->raw($value)->up;
+	}
+
 }
