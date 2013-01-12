@@ -4,22 +4,14 @@
  * @author Ustimenko Alexander <a@ustimen.co>
  * @copyright 2013 Ustimenko Alexander <a@ustimen.co>
  */
-class OopConfig_CakePHP_FindParams_Fields extends OopConfig_Modules_Abstract_Part {
+class OopConfig_CakePHP_FindParams_Columns extends OopConfig_CakePHP_FindParams_AbstractPart {
 
 	/**
-	 * @return OopConfig_CakePHP_FindParams
-	 */
-	public function up() {
-		return $this->up;
-	}
-
-	/**
-	 * Add field
+	 * Add field into parameters
 	 * @param string $field
-	 * @return OopConfig_CakePHP_FindParams_Fields
+	 * @return OopConfig_CakePHP_FindParams_Columns
 	 */
 	public function add($field) {
 		return $this->_add($field);
 	}
-
 }

@@ -15,27 +15,27 @@ class OopConfig_CakePHP_FindParams extends OopConfig_Modules_Abstract {
 
 	/**
 	 * A list of fields to be retrieved when data is fetched. Returns all fields by default.
-	 * @var OopConfig_CakePHP_FindParams_Fields
+	 * @var OopConfig_CakePHP_FindParams_Columns
 	 */
 	public $fields;
 
 	/**
 	 * An SQL fragment that defines the sorting order for the returned rows.
-	 * @var OopConfig_CakePHP_FindParams_Order
+	 * @var OopConfig_CakePHP_FindParams_Columns
 	 */
 	public $order;
 
 	/**
 	 * An SQL fragment that defines the grouping for the returned rows.
-	 * @var OopConfig_CakePHP_FindParams_Group
+	 * @var OopConfig_CakePHP_FindParams_Columns
 	 */
 	public $group;
 
 	public function __construct() {
 		$this->conditions = new OopConfig_CakePHP_FindParams_Conditions($this);
-		$this->fields     = new OopConfig_CakePHP_FindParams_Fields($this);
-		$this->order      = new OopConfig_CakePHP_FindParams_Order($this);
-		$this->group      = new OopConfig_CakePHP_FindParams_Group($this);
+		$this->fields     = new OopConfig_CakePHP_FindParams_Columns($this);
+		$this->order      = new OopConfig_CakePHP_FindParams_Columns($this);
+		$this->group      = new OopConfig_CakePHP_FindParams_Columns($this);
 	}
 
 	/**
