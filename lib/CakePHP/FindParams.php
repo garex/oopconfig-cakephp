@@ -38,4 +38,13 @@ class OopConfig_CakePHP_FindParams extends OopConfig_Modules_Abstract {
 		$this->group      = new OopConfig_CakePHP_FindParams_Group($this);
 	}
 
+	/**
+	 * Number of associations to recurse through during find calls. Fetches only the first level by default.
+	 * @param integer $value
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function recursive($value) {
+		return $this->_setAssoc('recursive', $value);
+	}
+
 }

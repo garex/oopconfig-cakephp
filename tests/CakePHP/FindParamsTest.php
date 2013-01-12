@@ -30,4 +30,19 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($expected, $actual);
 	}
+
+	public function testSetFlatValueLikeResursive() {
+		$expected = array(
+			'recursive'  => 1,
+		);
+
+		$findParams = new OopConfig_CakePHP_FindParams();
+		$actual     = $findParams
+			->recursive(1)
+			->get()
+		;
+
+		$this->assertEquals($expected, $actual);
+	}
+
 }
