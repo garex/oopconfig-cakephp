@@ -183,4 +183,24 @@ class OopConfig_CakePHP_FindParams extends OopConfig_Modules_Abstract {
 		return $this->conditions->raw($value)->up;
 	}
 
+	/**
+	 * Checks if field value is like pattern
+	 * @param string $field
+	 * @param string $pattern
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function conditionLike($field, $pattern) {
+		return $this->conditions->like($field, $pattern)->up;
+	}
+
+	/**
+	 * Checks if field value is not like pattern
+	 * @param string $field
+	 * @param string $pattern
+	 * @return OopConfig_CakePHP_FindParams
+	 */
+	public function conditionNotLike($field, $pattern) {
+		return $this->conditions->notLike($field, $pattern)->up;
+	}
+
 }

@@ -92,6 +92,8 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 				'Model.field4 <'  => 4,
 				'Model.field5 BETWEEN ? AND ?' => array(5, 5),
 				'Model.field6 & 6 = 6',
+				'Model.field7 LIKE'     => '%7%',
+				'Model.field8 NOT LIKE' => '%8%',
 			),
 		);
 
@@ -103,6 +105,8 @@ class FindParamsTest extends PHPUnit_Framework_TestCase {
 			->conditionLess('Model.field4', 4)
 			->conditionBetween('Model.field5', 5, 5)
 			->conditionRaw('Model.field6 & 6 = 6')
+			->conditionLike('Model.field7', '%7%')
+			->conditionNotLike('Model.field8', '%8%')
 			->get()
 		;
 
